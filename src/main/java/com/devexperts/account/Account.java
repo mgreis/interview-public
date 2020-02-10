@@ -1,16 +1,33 @@
 package com.devexperts.account;
 
+import javax.persistence.*;
+
+@Entity
 public class Account {
-    private final AccountKey accountKey;
-    private final String firstName;
-    private final String lastName;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @OneToOne
+    private AccountKey accountKey;
+
+    private String firstName;
+    private String lastName;
     private Double balance;
+
+    public Account() {
+    }
 
     public Account(AccountKey accountKey, String firstName, String lastName, Double balance) {
         this.accountKey = accountKey;
         this.firstName = firstName;
         this.lastName = lastName;
         this.balance = balance;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public AccountKey getAccountKey() {
